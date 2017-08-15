@@ -1,0 +1,47 @@
+---
+# Copyright 2014, Rackspace US, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# ##
+# ## This file contains commonly used overrides for convenience. Please inspect
+# ## the defaults for each role to find additional override options.
+# ##
+
+# # Debug and Verbose options.
+debug: false
+
+haproxy_keepalived_external_vip_cidr: "{{ public_vip.ip }}/32"
+haproxy_keepalived_internal_vip_cidr: "{{ internal_vip.ip }}/32"
+haproxy_keepalived_external_interface: br-external
+haproxy_keepalived_internal_interface: br-mgmt
+keepalived_ping_address: "{{ ntp_server }}"
+
+{% if "openvswitch" == NEUTRON_MECHANISM_DRIVERS[0] or
+   "opendaylight" == NEUTRON_MECHANISM_DRIVERS[0]
+%}
+openstack_host_specific_kernel_modules:
+  - name: "openvswitch"
+    pattern: "CONFIG_OPENVSWITCH="
+    group: "network_hosts"
+
+neutron_plugin_type: ml2.ovs
+
+neutron_ml2_drivers_type: "local,flat,vlan,vxlan"
+
+neutron_provider_networks:
+  network_flat_networks: "*"
+  network_types: "vxlan"
+  network_vxlan_ranges: "1:1000"
+  network_mappings: "physnet:br-provider"
+{% endif %}

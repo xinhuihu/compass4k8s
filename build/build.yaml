@@ -1,0 +1,46 @@
+---
+packages:
+  - name: CentOS-7-x86_64-Minimal-1611.iso
+    description: "Centos ISO of each host for provisioning"
+    get_method: cached
+    url: http://artifacts.opnfv.org/compass4nfv/package/master/CentOS-7-x86_64-Minimal-1611.iso
+
+  - name: ubuntu-16.04-server-amd64.iso
+    description: "Ubuntu ISO of each host for provisioning"
+    get_method: cached
+    url: http://artifacts.opnfv.org/compass4nfv/package/master/ubuntu-16.04-server-amd64.iso
+
+  - name: compass-deck
+    description: "RESTful API and DB Handlers for Compass"
+    get_method: docker
+    url: compass4nfv/compass-deck
+
+  - name: compass-tasks-osa
+    description: "compass task container for openstack deployment via openstack-ansible"
+    get_method: docker
+    url: compass4nfv/compass-tasks-osa
+
+  - name: compass-cobbler
+    description: "cobbler container for compass"
+    get_method: docker
+    url: compass4nfv/compass-cobbler
+
+  - name: compass-db
+    description: "datebase container for compass"
+    get_method: docker
+    url: compass4nfv/compass-db
+
+  - name: compass-mq
+    description: "message queue container for compass"
+    get_method: docker
+    url: compass4nfv/compass-mq
+
+  - name: yardstick
+    description: "yardstick container for compass"
+    get_method: docker
+    url: opnfv/yardstick
+
+  - name: compass-docker-compose
+    description: "containerized compass compose ansible"
+    get_method: git
+    url: https://github.com/Compass4NFV/compass-docker-compose.git

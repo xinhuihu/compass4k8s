@@ -1,0 +1,100 @@
+##############################################################################
+# Copyright (c) 2016 HUAWEI TECHNOLOGIES CO.,LTD and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Apache License, Version 2.0
+# which accompanies this distribution, and is available at
+# http://www.apache.org/licenses/LICENSE-2.0
+##############################################################################
+
+---
+nodes:
+  - name: host1
+    tags: control
+    arch: "x86_64"
+    # PXE install nic MAC
+    mac_address: '11:22:33:44:55'
+
+    # for virtual deployment
+    cpus: 2
+    memory: 2048
+    disk: 40
+
+    # for baremetal deployment
+    power:
+      type: ipmi
+      address: 10.4.7.3
+      user: root
+      pass: root
+
+  - name: host2
+    tags: control
+    arch: "x86_64"
+    # PXE install nic MAC
+    mac_address: '11:22:33:44:56'
+
+    # for virtual deployment
+    cpus: 2
+    memory: 2048
+    disk: 40
+
+    # for baremetal deployment
+    power:
+      type: ipmi
+      address: 10.4.7.4
+      user: root
+      pass: root
+
+  - name: host3
+    tags: control
+    arch: "x86_64"
+    # PXE install nic MAC
+    mac_address: '11:22:33:44:57'
+
+    # for virtual deployment
+    cpus: 2
+    memory: 2048
+    disk: 40
+
+    # for baremetal deployment
+    power:
+      type: ipmi
+      address: 10.4.7.5
+      user: root
+      pass: root
+
+  - name: host4
+    tags: compute
+    arch: "x86_64"
+    # PXE install nic MAC
+    mac_address: '11:22:33:44:57'
+
+    # for virtual deployment
+    cpus: 2
+    memory: 2048
+    disk: 40
+
+    # for baremetal deployment
+    power:
+      type: ipmi
+      address: 10.4.7.6
+      user: root
+      pass: root
+
+  - name: host5
+    tags: compute
+    arch: "x86_64"
+    # PXE install nic MAC
+    mac_address: '11:22:33:44:58'
+
+    # for virtual deployment
+    cpus: 2
+    memory: 2048
+    disk: 40
+
+    # for baremetal deployment
+    power:
+      type: ipmi
+      address: 10.4.7.7
+      user: root
+      pass: root

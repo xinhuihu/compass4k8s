@@ -1,0 +1,41 @@
+##############################################################################
+# Copyright (c) 2016 HUAWEI TECHNOLOGIES CO.,LTD and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Apache License, Version 2.0
+# which accompanies this distribution, and is available at
+# http://www.apache.org/licenses/LICENSE-2.0
+##############################################################################
+---
+- name: create network
+  shell: "export ANSIBLE_LOG_PATH=/var/ansible/run/openstack_ocata-opnfv2/ansible.log; \
+          cd /opt/openstack-ansible/playbooks; \
+          openstack-ansible create-network.yml > /dev/null"
+
+- name: create flavor
+  shell: "export ANSIBLE_LOG_PATH=/var/ansible/run/openstack_ocata-opnfv2/ansible.log; \
+          cd /opt/openstack-ansible/playbooks; \
+          openstack-ansible create-flavor.yml > /dev/null"
+
+- name: run ansible yml to fetch openrc
+  shell: "export ANSIBLE_LOG_PATH=/var/ansible/run/openstack_ocata-opnfv2/ansible.log; \
+          cd /opt/openstack-ansible/playbooks; \
+          openstack-ansible fetch-files.yml > /dev/null"
+
+- name: replace http with https in openrc
+  replace:
+    dest: /opt/openrc
+    regexp: "http://"
+    replace: "https://"
+
+- name: replace internalURL with publicURL in openrc
+  replace:
+    dest: /opt/openrc
+    regexp: "{{ internal_vip['ip'] }}"
+    replace: "{{ public_vip['ip'] }}"
+
+- name: change the endpoint type
+  replace:
+    dest: /opt/openrc
+    regexp: "internalURL"
+    replace: "publicURL"
